@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<GameComponentDef>
+		<defName>JobSatisfactionGameComponent</defName>
+		<label>Job Satisfaction Game Component</label>
+		<componentClass>Job_Satisfaction.JobSatisfactionGameComponent</componentClass>
+	</GameComponentDef>
+</Defs>

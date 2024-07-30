@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Job Satisfaction</name>
+	<author>Lewkah0</author>
+	<description>Gives pawns a mood boost for completing long tasks.</description>
+	<packageId>Lewkah0.JobSatisfaction</packageId>
+	<supportedVersions>
+		<li>1.5</li>
+	</supportedVersions>
+</ModMetaData>

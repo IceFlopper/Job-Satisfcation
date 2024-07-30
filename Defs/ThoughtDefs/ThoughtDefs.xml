@@ -1,0 +1,121 @@
+﻿<Defs>
+	<ThoughtDef>
+		<defName>JobSatisfaction_CompletedLongTask</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<thoughtClass>Thought_Memory</thoughtClass>
+		<effectMultiplyingStat>WorkSpeedGlobal</effectMultiplyingStat>
+		<stages>
+			<li>
+				<label>completed a short task</label>
+				<baseMoodEffect>3</baseMoodEffect>
+				<description>I completed a short task and feel slightly accomplished.</description>
+			</li>
+			<li>
+				<label>completed a medium task</label>
+				<baseMoodEffect>5</baseMoodEffect>
+				<description>I completed a medium-length task and feel accomplished.</description>
+			</li>
+			<li>
+				<label>completed a long task</label>
+				<baseMoodEffect>10</baseMoodEffect>
+				<description>I completed a long task and feel very accomplished.</description>
+			</li>
+			<li>
+				<label>completed an extended task</label>
+				<baseMoodEffect>15</baseMoodEffect>
+				<description>I completed an extended task and feel extremely accomplished.</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>JobSatisfaction_CompletedLongBill</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<thoughtClass>Thought_Memory</thoughtClass>
+		<effectMultiplyingStat>WorkSpeedGlobal</effectMultiplyingStat>
+		<stages>
+			<li>
+				<label>completed a short crafting task</label>
+				<baseMoodEffect>3</baseMoodEffect>
+				<description>I completed a short crafting task and feel slightly accomplished.</description>
+			</li>
+			<li>
+				<label>completed a medium crafting task</label>
+				<baseMoodEffect>5</baseMoodEffect>
+				<description>I completed a medium-length crafting task and feel accomplished.</description>
+			</li>
+			<li>
+				<label>completed a long crafting task</label>
+				<baseMoodEffect>10</baseMoodEffect>
+				<description>I completed a long crafting task and feel very accomplished.</description>
+			</li>
+			<li>
+				<label>completed an extended crafting task</label>
+				<baseMoodEffect>15</baseMoodEffect>
+				<description>I completed an extended crafting task and feel extremely accomplished.</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>JobSatisfaction_CompletedLongConstruction</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<thoughtClass>Thought_Memory</thoughtClass>
+		<effectMultiplyingStat>WorkSpeedGlobal</effectMultiplyingStat>
+		<stages>
+			<li>
+				<label>completed a short construction project</label>
+				<baseMoodEffect>3</baseMoodEffect>
+				<description>I completed a short construction project and feel slightly proud of the result.</description>
+			</li>
+			<li>
+				<label>completed a medium construction project</label>
+				<baseMoodEffect>5</baseMoodEffect>
+				<description>I completed a medium-length construction project and feel proud of the result.</description>
+			</li>
+			<li>
+				<label>completed a long construction project</label>
+				<baseMoodEffect>10</baseMoodEffect>
+				<description>I completed a long construction project and feel very proud of the result.</description>
+			</li>
+			<li>
+				<label>completed an extended construction project</label>
+				<baseMoodEffect>15</baseMoodEffect>
+				<description>I completed an extended construction project and feel extremely proud of the result.</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>JobSatisfaction_CompletedSignificantResearch</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<thoughtClass>Thought_Memory</thoughtClass>
+		<effectMultiplyingStat>ResearchSpeed</effectMultiplyingStat>
+		<stages>
+			<li>
+				<label>completed minor research</label>
+				<baseMoodEffect>3</baseMoodEffect>
+				<description>I completed a minor research project and feel slightly intellectually stimulated.</description>
+			</li>
+			<li>
+				<label>completed moderate research</label>
+				<baseMoodEffect>5</baseMoodEffect>
+				<description>I completed a moderate research project and feel intellectually stimulated.</description>
+			</li>
+			<li>
+				<label>completed significant research</label>
+				<baseMoodEffect>10</baseMoodEffect>
+				<description>I completed a significant research project and feel very intellectually stimulated.</description>
+			</li>
+			<li>
+				<label>completed major research</label>
+				<baseMoodEffect>15</baseMoodEffect>
+				<description>I completed a major research project and feel extremely intellectually stimulated.</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+</Defs>
