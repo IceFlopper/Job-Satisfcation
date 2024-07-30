@@ -15,10 +15,18 @@ namespace Job_Satisfaction
         {
             base.WorldComponentTick();
 
-            if (Find.TickManager.TicksGame > lastCheckTick + checkIntervalTicks)
+            int currentHour = GenLocalDate.HourOfDay(Find.CurrentMap);
+
+            // Check if it's midnight (0 hour) to reset the work
+            if (currentHour == 0)
             {
                 WorkTracker.ResetAllWork();
-                lastCheckTick = Find.TickManager.TicksGame;
+
+                // Optionally, apply mood boosts to all pawns
+                foreach (Pawn pawn in PawnsFinder.AllMaps_FreeColonists)
+                {
+                    ApplyMoodBoosts(pawn);
+                }
             }
         }
 
@@ -33,8 +41,6 @@ namespace Job_Satisfaction
             float mediumThreshold = 1000 * workSpeed;
             float largeThreshold = 2000 * workSpeed;
             float hugeThreshold = 3500 * workSpeed;
-
-            //Log.Message($"JobSatisfaction: Checking pawn {pawn.Name}, total work: {totalWork}, work speed: {workSpeed}");
 
             if (totalWork > smallThreshold && totalWork <= mediumThreshold)
             {
@@ -55,52 +61,8 @@ namespace Job_Satisfaction
 
             if (thoughtDefName != null)
             {
-                //Log.Message($"JobSatisfaction: Adding thought {thoughtDefName} to pawn {pawn.Name}");
-
-                // Define all job satisfaction thoughts
-                string[] jobSatisfactionThoughts = new string[]
-                {
-                    "JobSatisfaction_Small",
-                    "JobSatisfaction_Medium",
-                    "JobSatisfaction_Large",
-                    "JobSatisfaction_Huge"
-                };
-
-                // Remove any existing job satisfaction thoughts
-                if (pawn.needs != null && pawn.needs.mood != null)
-                {
-                    foreach (string defName in jobSatisfactionThoughts)
-                    {
-                        ThoughtDef existingThoughtDef = ThoughtDef.Named(defName);
-                        pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(existingThoughtDef);
-                    }
-
-                    // Add the new job satisfaction thought
-                    ThoughtDef thoughtDef = ThoughtDef.Named(thoughtDefName);
-                    if (thoughtDef == null)
-                    {
-                        Log.Error($"JobSatisfaction: ThoughtDef {thoughtDefName} not found!");
-                        return;
-                    }
-
-                    Thought_Memory thought = (Thought_Memory)ThoughtMaker.MakeThought(thoughtDef);
-                    if (thought == null)
-                    {
-                        Log.Error($"JobSatisfaction: Failed to create thought {thoughtDefName} for pawn {pawn.Name}");
-                        return;
-                    }
-
-                    pawn.needs.mood.thoughts.memories.TryGainMemory(thought);
-                    //Log.Message($"JobSatisfaction: Added thought {thoughtDefName} to pawn {pawn.Name} for work amount {totalWork}");
-                }
-                else
-                {
-                    Log.Warning($"JobSatisfaction: Pawn {pawn.Name} has no mood needs.");
-                }
-            }
-            else
-            {
-                //Log.Message($"JobSatisfaction: Pawn {pawn.Name} does not meet any work threshold for mood boost.");
+                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn);
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, thoughtDefName);
             }
         }
     }

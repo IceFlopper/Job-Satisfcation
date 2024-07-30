@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Verse;
-using Verse.AI;
 
 namespace Job_Satisfaction
 {
@@ -16,7 +15,7 @@ namespace Job_Satisfaction
                 workAmounts[pawn] = 0f;
             }
             workAmounts[pawn] += amount;
-            Log.Message($"JobSatisfaction: Total work amount {WorkTracker.GetWork(pawn)} for pawn {pawn.Name}");
+            Log.Message($"JobSatisfaction: Total work amount {GetWork(pawn)} for pawn {pawn.Name}");
         }
 
         public static float GetWork(Pawn pawn)
@@ -33,12 +32,14 @@ namespace Job_Satisfaction
             if (workAmounts.ContainsKey(pawn))
             {
                 workAmounts[pawn] = 0f;
+                Log.Message($"JobSatisfaction: Reset work for pawn {pawn.Name}");
             }
         }
 
         public static void ResetAllWork()
         {
             workAmounts.Clear();
+            Log.Message("JobSatisfaction: Reset work for all pawns.");
         }
     }
 }

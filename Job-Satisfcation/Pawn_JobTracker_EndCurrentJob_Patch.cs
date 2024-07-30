@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Job_Satisfaction
 {
+    //make sure work progress resets when mood thought dissapears
     [HarmonyPatch(typeof(Pawn_JobTracker), "EndCurrentJob")]
     public static class Pawn_JobTracker_EndCurrentJob_Patch
     {
@@ -33,7 +34,7 @@ namespace Job_Satisfaction
                 }
                 else if (job.def == JobDefOf.FinishFrame && job.targetA.Thing is Frame frame && condition == JobCondition.Succeeded)
                 {
-                    workAmount = (float)(frame.WorkToBuild );
+                    workAmount = (float)(frame.WorkToBuild / 47.25);
                 }
                 else if (job.def == JobDefOf.Research)
                 {
@@ -42,6 +43,26 @@ namespace Job_Satisfaction
                     {
                         workAmount = currentResearch.baseCost;
                     }
+                }
+                else if (job.def == JobDefOf.Harvest && job.targetA.Thing is Plant plant && condition == JobCondition.Succeeded)
+                {
+                    workAmount = plant.def.plant.harvestWork;
+                }
+                else if (job.def == JobDefOf.CutPlant && job.targetA.Thing is Plant plantToCut && condition == JobCondition.Succeeded)
+                {
+                    workAmount = plantToCut.def.plant.harvestWork; 
+                }
+                else if (job.def == JobDefOf.Mine && job.targetA.Thing is Mineable mineable && condition == JobCondition.Succeeded)
+                {
+                    workAmount = mineable.def.building.mineableYield;
+                }
+                else if (job.def == JobDefOf.Clean)
+                {
+                    workAmount = 2; 
+                }
+                else if (job.def == JobDefOf.HaulToCell || job.def == JobDefOf.HaulToContainer)
+                {
+                    workAmount = 2;
                 }
 
                 if (workAmount > 0)

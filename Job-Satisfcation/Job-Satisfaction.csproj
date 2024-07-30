@@ -53,9 +53,11 @@
     <Compile Include="GameComponent_WorkTracker.cs" />
     <Compile Include="JobSatisfactionGameComponent.cs" />
     <Compile Include="JobSatisfactionMod.cs" />
+    <Compile Include="JobSatisfactionUtility.cs" />
     <Compile Include="Pawn_JobTracker_EndCurrentJob_Patch.cs" />
     <Compile Include="CompLastThought.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MemoryThoughtHandler_RemoveMemory_Patch.cs" />
     <Compile Include="WorkTracker.cs" />
   </ItemGroup>
   <ItemGroup>
