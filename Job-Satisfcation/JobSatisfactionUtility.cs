@@ -11,7 +11,8 @@ namespace Job_Satisfaction
             "JobSatisfaction_Small",
             "JobSatisfaction_Medium",
             "JobSatisfaction_Large",
-            "JobSatisfaction_Huge"
+            "JobSatisfaction_Huge",
+            "JobSatisfaction_Burnout"
         };
 
         public static void RemoveExistingJobSatisfactionThoughts(Pawn pawn)
@@ -42,6 +43,7 @@ namespace Job_Satisfaction
                 return;
             }
 
+            Log.Message($"JobSatisfaction: Adding thought {thoughtDefName} to pawn {pawn.Name}");
             pawn.needs.mood.thoughts.memories.TryGainMemory(thought);
         }
     }

@@ -15,17 +15,16 @@ namespace Job_Satisfaction
                 Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
                 if (pawn == null || th == null)
                 {
-                    Log.Message("JobSatisfaction: Pawn or Thought_Memory is null, exiting.");
                     return;
                 }
 
                 // Check if the thought memory is naturally expiring
-                if (th.age >= th.def.durationDays * 60000) 
+                if (th.age >= th.def.durationDays * 60000)
                 {
                     if (Array.Exists(JobSatisfactionUtility.JobSatisfactionThoughts, thoughtDefName => th.def.defName == thoughtDefName))
                     {
+                        Log.Message($"JobSatisfaction: Thought {th.def.defName} expired for pawn {pawn.Name}");
                         WorkTracker.ResetWork(pawn);
-                        Log.Message($"JobSatisfaction: Reset work for pawn {pawn.Name} due to expiring thought {th.def.defName}");
                     }
                 }
             }

@@ -1,60 +1,183 @@
 ﻿<Defs>
-	<ThoughtDef>
-		<defName>JobSatisfaction_Small</defName>
-		<label>small sense of satisfaction</label>
-		<durationDays>1.0</durationDays>
-		<stackLimit>1</stackLimit>
-		<thoughtClass>Thought_Memory</thoughtClass>
-		<stages>
-			<li>
-				<label>small sense of satisfaction</label>
-				<description>Felt a small sense of satisfaction from the work done.</description>
-				<baseMoodEffect>3</baseMoodEffect>
-			</li>
-		</stages>
-	</ThoughtDef>
+    <ThoughtDef>
+        <defName>JobSatisfaction_Small</defName>
+        <label>tiny spark of satisfaction</label>
+        <durationDays>0.7</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>tiny spark of satisfaction</label>
+                <description>A tiny spark of satisfaction warmed the heart after a job well done.</description>
+                <baseMoodEffect>3</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
 
-	<ThoughtDef>
-		<defName>JobSatisfaction_Medium</defName>
-		<label>moderate sense of satisfaction</label>
-		<durationDays>1.0</durationDays>
-		<stackLimit>1</stackLimit>
-		<thoughtClass>Thought_Memory</thoughtClass>
-		<stages>
-			<li>
-				<label>moderate sense of satisfaction</label>
-				<description>Felt a moderate sense of satisfaction from the work done.</description>
-				<baseMoodEffect>5</baseMoodEffect>
-			</li>
-		</stages>
-	</ThoughtDef>
+    <ThoughtDef>
+        <defName>JobSatisfaction_Medium</defName>
+        <label>pleasant sense of achievement</label>
+        <durationDays>0.9</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>pleasant sense of achievement</label>
+                <description>A pleasant sense of achievement came from accomplishing a meaningful task.</description>
+                <baseMoodEffect>5</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
 
-	<ThoughtDef>
-		<defName>JobSatisfaction_Large</defName>
-		<label>great sense of satisfaction</label>
-		<durationDays>1.0</durationDays>
-		<stackLimit>1</stackLimit>
-		<thoughtClass>Thought_Memory</thoughtClass>
-		<stages>
-			<li>
-				<label>great sense of satisfaction</label>
-				<description>Felt a great sense of satisfaction from the work done.</description>
-				<baseMoodEffect>10</baseMoodEffect>
-			</li>
-		</stages>
-	</ThoughtDef>
-	<ThoughtDef>
-		<defName>JobSatisfaction_Huge</defName>
-		<label>Amazing sense of satisfaction</label>
-		<durationDays>1.0</durationDays>
-		<stackLimit>1</stackLimit>
-		<thoughtClass>Thought_Memory</thoughtClass>
-		<stages>
-			<li>
-				<label>Amazing sense of satisfaction</label>
-				<description>Felt a Amazing sense of satisfaction from the work done.</description>
-				<baseMoodEffect>15</baseMoodEffect>
-			</li>
-		</stages>
-	</ThoughtDef>
+    <ThoughtDef>
+        <defName>JobSatisfaction_Large</defName>
+        <label>deep sense of fulfillment</label>
+        <durationDays>1.5</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>deep sense of fulfillment</label>
+                <description>A deep sense of fulfillment filled the soul after completing the work.</description>
+                <baseMoodEffect>10</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_Huge</defName>
+        <label>overwhelming joy of accomplishment</label>
+        <durationDays>2</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>overwhelming joy of accomplishment</label>
+                <description>An overwhelming joy of accomplishment radiated after achieving the goal.</description>
+                <baseMoodEffect>15</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- Lazy Thoughts -->
+    <ThoughtDef>
+        <defName>JobSatisfaction_Lazy_Small</defName>
+        <label>small sense of satisfaction (Lazy)</label>
+        <durationDays>0.7</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>small sense of satisfaction (Lazy)</label>
+                <description>A small sense of satisfaction came from doing a bit of work.</description>
+                <baseMoodEffect>2</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_Lazy_Medium</defName>
+        <label>moderate sense of satisfaction (Lazy)</label>
+        <durationDays>0.9</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>moderate sense of satisfaction (Lazy)</label>
+                <description>A moderate sense of satisfaction was felt after doing some work.</description>
+                <baseMoodEffect>3</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_Lazy_Large</defName>
+        <label>significant sense of satisfaction (Lazy)</label>
+        <durationDays>1.5</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>significant sense of satisfaction (Lazy)</label>
+                <description>A significant sense of satisfaction was felt after doing a lot of work.</description>
+                <baseMoodEffect>6</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_Lazy_Huge</defName>
+        <label>great sense of satisfaction (Lazy)</label>
+        <durationDays>2</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>great sense of satisfaction (Lazy)</label>
+                <description>A great sense of satisfaction was felt after doing an extraordinary amount of work.</description>
+                <baseMoodEffect>9</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- Hard Worker Thoughts -->
+    <ThoughtDef>
+        <defName>JobSatisfaction_HardWorker_Small</defName>
+        <label>small sense of satisfaction (Hard Worker)</label>
+        <durationDays>0.7</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>small sense of satisfaction (Hard Worker)</label>
+                <description>A small sense of satisfaction came from doing a bit of work.</description>
+                <baseMoodEffect>5</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_HardWorker_Medium</defName>
+        <label>moderate sense of satisfaction (Hard Worker)</label>
+        <durationDays>0.9</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>moderate sense of satisfaction (Hard Worker)</label>
+                <description>A moderate sense of satisfaction was felt after doing some work.</description>
+                <baseMoodEffect>8</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_HardWorker_Large</defName>
+        <label>significant sense of satisfaction (Hard Worker)</label>
+        <durationDays>1.5</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>significant sense of satisfaction (Hard Worker)</label>
+                <description>A significant sense of satisfaction was felt after doing a lot of work.</description>
+                <baseMoodEffect>12</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>JobSatisfaction_HardWorker_Huge</defName>
+        <label>great sense of satisfaction (Hard Worker)</label>
+        <durationDays>2</durationDays>
+        <stackLimit>1</stackLimit>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <stages>
+            <li>
+                <label>great sense of satisfaction (Hard Worker)</label>
+                <description>A great sense of satisfaction was felt after doing an extraordinary amount of work.</description>
+                <baseMoodEffect>18</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
 </Defs>

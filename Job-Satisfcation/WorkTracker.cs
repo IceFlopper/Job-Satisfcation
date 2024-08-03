@@ -15,7 +15,7 @@ namespace Job_Satisfaction
                 workAmounts[pawn] = 0f;
             }
             workAmounts[pawn] += amount;
-            Log.Message($"JobSatisfaction: Total work amount {GetWork(pawn)} for pawn {pawn.Name}");
+            Log.Message($"JobSatisfaction: Total work for pawn {pawn.Name} is now {workAmounts[pawn]}");
         }
 
         public static float GetWork(Pawn pawn)
@@ -39,7 +39,7 @@ namespace Job_Satisfaction
         public static void ResetAllWork()
         {
             workAmounts.Clear();
-            Log.Message("JobSatisfaction: Reset work for all pawns.");
+            Log.Message("JobSatisfaction: Reset all work for all pawns");
         }
     }
 }

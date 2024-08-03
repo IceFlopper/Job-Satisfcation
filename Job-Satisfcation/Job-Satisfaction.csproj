@@ -48,11 +48,15 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameComponent_WorkTracker.cs" />
     <Compile Include="JobSatisfactionGameComponent.cs" />
     <Compile Include="JobSatisfactionMod.cs" />
+    <Compile Include="JobSatisfactionSettings .cs" />
     <Compile Include="JobSatisfactionUtility.cs" />
     <Compile Include="Pawn_JobTracker_EndCurrentJob_Patch.cs" />
     <Compile Include="CompLastThought.cs" />

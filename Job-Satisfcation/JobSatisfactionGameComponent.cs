@@ -21,10 +21,6 @@ namespace Job_Satisfaction
 
         private void Initialize()
         {
-
-
-
-        
         }
     }
 }

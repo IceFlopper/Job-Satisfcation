@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Job_Satisfaction
 {
-    //make sure work progress resets when mood thought dissapears
     [HarmonyPatch(typeof(Pawn_JobTracker), "EndCurrentJob")]
     public static class Pawn_JobTracker_EndCurrentJob_Patch
     {
@@ -22,7 +21,6 @@ namespace Job_Satisfaction
 
                 if (job == null || pawn == null)
                 {
-                    Log.Message("JobSatisfaction: Job or pawn is null, exiting.");
                     return;
                 }
 
@@ -46,19 +44,19 @@ namespace Job_Satisfaction
                 }
                 else if (job.def == JobDefOf.Harvest && job.targetA.Thing is Plant plant && condition == JobCondition.Succeeded)
                 {
-                    workAmount = plant.def.plant.harvestWork;
+                    workAmount = 2;
                 }
                 else if (job.def == JobDefOf.CutPlant && job.targetA.Thing is Plant plantToCut && condition == JobCondition.Succeeded)
                 {
-                    workAmount = plantToCut.def.plant.harvestWork; 
+                    workAmount = 2;
                 }
                 else if (job.def == JobDefOf.Mine && job.targetA.Thing is Mineable mineable && condition == JobCondition.Succeeded)
                 {
-                    workAmount = mineable.def.building.mineableYield;
+                    workAmount = 2;
                 }
                 else if (job.def == JobDefOf.Clean)
                 {
-                    workAmount = 2; 
+                    workAmount = 2;
                 }
                 else if (job.def == JobDefOf.HaulToCell || job.def == JobDefOf.HaulToContainer)
                 {
@@ -67,8 +65,8 @@ namespace Job_Satisfaction
 
                 if (workAmount > 0)
                 {
+                    Log.Message($"JobSatisfaction: Adding {workAmount} work to pawn {pawn.Name} for job {job.def.defName}");
                     WorkTracker.AddWork(pawn, workAmount);
-                    //Log.Message($"JobSatisfaction: Added work amount {workAmount} for pawn {pawn.Name} for job {job.def.defName}");
 
                     // Call ApplyMoodBoosts method here
                     var workTracker = Find.World.GetComponent<GameComponent_WorkTracker>();
