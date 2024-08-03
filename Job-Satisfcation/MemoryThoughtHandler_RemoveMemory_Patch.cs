@@ -23,7 +23,6 @@ namespace Job_Satisfaction
                 {
                     if (Array.Exists(JobSatisfactionUtility.JobSatisfactionThoughts, thoughtDefName => th.def.defName == thoughtDefName))
                     {
-                        Log.Message($"JobSatisfaction: Thought {th.def.defName} expired for pawn {pawn.Name}");
                         WorkTracker.ResetWork(pawn);
                     }
                 }

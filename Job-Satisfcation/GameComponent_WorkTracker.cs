@@ -44,13 +44,10 @@ namespace Job_Satisfaction
             float largeThreshold = 2000 * workSpeed * traitMultiplier;
             float hugeThreshold = 3500 * workSpeed * traitMultiplier;
 
-            Log.Message($"JobSatisfaction: Pawn {pawn.Name} has worked {totalWork} with thresholds - Small: {smallThreshold}, Medium: {mediumThreshold}, Large: {largeThreshold}, Huge: {hugeThreshold}");
-
             // Check for burnout first
             if (JobSatisfactionMod.settings.enableBurnout && CheckForBurnout(pawn, totalWork, smallThreshold, mediumThreshold, largeThreshold, hugeThreshold))
             {
                 // If burnout occurs, skip applying positive mood boost
-                Log.Message($"JobSatisfaction: Pawn {pawn.Name} has experienced burnout.");
                 return;
             }
 

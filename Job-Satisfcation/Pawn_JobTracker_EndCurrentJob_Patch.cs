@@ -65,7 +65,6 @@ namespace Job_Satisfaction
 
                 if (workAmount > 0)
                 {
-                    Log.Message($"JobSatisfaction: Adding {workAmount} work to pawn {pawn.Name} for job {job.def.defName}");
                     WorkTracker.AddWork(pawn, workAmount);
 
                     // Call ApplyMoodBoosts method here
