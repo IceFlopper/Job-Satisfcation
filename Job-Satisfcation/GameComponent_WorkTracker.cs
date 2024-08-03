@@ -14,14 +14,12 @@ namespace Job_Satisfaction
         {
             base.WorldComponentTick();
 
-            int currentHour = GenLocalDate.HourOfDay(Find.CurrentMap);
-
-            // Check if it's midnight (0 hour) to reset the work
-            if (currentHour == 0)
+            if (Find.TickManager.TicksGame % CheckIntervalTicks == 0)
             {
+                //Log.Message("JobSatisfaction: Resetting all work and applying mood boosts.");
+
                 WorkTracker.ResetAllWork();
 
-                // Optionally, apply mood boosts to all pawns
                 foreach (Pawn pawn in PawnsFinder.AllMaps_FreeColonists)
                 {
                     ApplyMoodBoosts(pawn);
@@ -32,130 +30,47 @@ namespace Job_Satisfaction
         public void ApplyMoodBoosts(Pawn pawn)
         {
             float totalWork = WorkTracker.GetWork(pawn);
-            float workSpeed = JobSatisfactionMod.settings.relativeMoodBoost ? pawn.GetStatValue(StatDefOf.WorkSpeedGlobal) : 1f;
-            string thoughtDefName = null;
+            var thresholds = JobSatisfactionUtility.CalculateThresholds(pawn);
 
-            // Get trait multipliers
-            float traitMultiplier = GetTraitMultiplier(pawn);
+            //Log.Message($"JobSatisfaction: Applying mood boosts for pawn '{pawn.Name}', total work: {totalWork}, thresholds: {thresholds}");
 
-            // Scale work thresholds based on pawn's work speed and traits
-            float smallThreshold = 500 * workSpeed * traitMultiplier;
-            float mediumThreshold = 1000 * workSpeed * traitMultiplier;
-            float largeThreshold = 2000 * workSpeed * traitMultiplier;
-            float hugeThreshold = 3500 * workSpeed * traitMultiplier;
-
-            // Check for burnout first
-            if (JobSatisfactionMod.settings.enableBurnout && CheckForBurnout(pawn, totalWork, smallThreshold, mediumThreshold, largeThreshold, hugeThreshold))
+            if (JobSatisfactionMod.settings.enableBurnout && CheckForBurnout(pawn, totalWork, thresholds))
             {
-                // If burnout occurs, skip applying positive mood boost
+                //Log.Message($"JobSatisfaction: Burnout detected for pawn '{pawn.Name}', skipping positive mood boost.");
                 return;
             }
 
-            // Determine appropriate thought based on work done and traits
-            thoughtDefName = GetThoughtDefName(pawn, totalWork, smallThreshold, mediumThreshold, largeThreshold, hugeThreshold);
 
-            // Apply the thought
+            string thoughtDefName = JobSatisfactionUtility.GetThoughtDefName(pawn, totalWork, thresholds.smallThreshold, thresholds.mediumThreshold, thresholds.largeThreshold, thresholds.hugeThreshold);
+
             if (thoughtDefName != null)
             {
-                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn);
+                // Check if the pawn already has the thought
+                if (pawn.needs.mood.thoughts.memories.Memories.Any(m => m.def.defName == thoughtDefName))
+                {
+                    //Log.Message($"JobSatisfaction: Pawn '{pawn.Name}' already has the thought '{thoughtDefName}', skipping.");
+                    return;
+                }
+
+                //Log.Message($"JobSatisfaction: Adding thought '{thoughtDefName}' to pawn '{pawn.Name}'.");
+                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn, thoughtDefName);
                 JobSatisfactionUtility.AddJobSatisfactionThought(pawn, thoughtDefName);
             }
         }
 
-        private bool CheckForBurnout(Pawn pawn, float totalWork, float smallThreshold, float mediumThreshold, float largeThreshold, float hugeThreshold)
+
+        private bool CheckForBurnout(Pawn pawn, float totalWork, (float smallThreshold, float mediumThreshold, float largeThreshold, float hugeThreshold) thresholds)
         {
-            float burnoutChance = 0f;
+            float burnoutThreshold = thresholds.hugeThreshold * 1.5f;
 
-            if (totalWork > smallThreshold && totalWork <= mediumThreshold)
+            if (totalWork > burnoutThreshold)
             {
-                burnoutChance = 0.02f;
-            }
-            else if (totalWork > mediumThreshold && totalWork <= largeThreshold)
-            {
-                burnoutChance = 0.04f;
-            }
-            else if (totalWork > largeThreshold && totalWork <= hugeThreshold)
-            {
-                burnoutChance = 0.06f;
-            }
-            else if (totalWork > hugeThreshold)
-            {
-                burnoutChance = 0.08f;
-            }
-
-            if (Rand.Value < burnoutChance)
-            {
-                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn);
+                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn, "JobSatisfaction_Burnout");
                 JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
-                return true; // Burnout occurred
+                return true;
             }
 
-            return false; // No burnout
-        }
-
-        private float GetTraitMultiplier(Pawn pawn)
-        {
-            Trait industriousness = pawn.story.traits.GetTrait(TraitDef.Named("Industriousness"));
-            if (industriousness != null)
-            {
-                switch (industriousness.Degree)
-                {
-                    case 2: // Industrious
-                        return 0.8f;
-                    case 1: // Hard Worker
-                        return 0.9f;
-                    case -1: // Lazy
-                        return 1.1f;
-                    case -2: // Slothful
-                        return 1.2f;
-                }
-            }
-            return 1f;
-        }
-
-        private string GetThoughtDefName(Pawn pawn, float totalWork, float smallThreshold, float mediumThreshold, float largeThreshold, float hugeThreshold)
-        {
-            Trait industriousness = pawn.story.traits.GetTrait(TraitDef.Named("Industriousness"));
-            if (industriousness != null)
-            {
-                string prefix = industriousness.Degree > 0 ? "JobSatisfaction_HardWorker_" : "JobSatisfaction_Lazy_";
-                if (totalWork > smallThreshold && totalWork <= mediumThreshold)
-                {
-                    return prefix + "Small";
-                }
-                else if (totalWork > mediumThreshold && totalWork <= largeThreshold)
-                {
-                    return prefix + "Medium";
-                }
-                else if (totalWork > largeThreshold && totalWork <= hugeThreshold)
-                {
-                    return prefix + "Large";
-                }
-                else if (totalWork > hugeThreshold)
-                {
-                    return prefix + "Huge";
-                }
-            }
-
-            // Default thoughts for pawns without the relevant traits
-            if (totalWork > smallThreshold && totalWork <= mediumThreshold)
-            {
-                return "JobSatisfaction_Small";
-            }
-            else if (totalWork > mediumThreshold && totalWork <= largeThreshold)
-            {
-                return "JobSatisfaction_Large";
-            }
-            else if (totalWork > largeThreshold && totalWork <= hugeThreshold)
-            {
-                return "JobSatisfaction_Huge";
-            }
-            else if (totalWork > hugeThreshold)
-            {
-                return "JobSatisfaction_Huge";
-            }
-
-            return null;
+            return false;
         }
     }
 }
