@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Jobs.LowLevel.Unsafe;
 using Verse;
 
 namespace Job_Satisfaction
@@ -15,7 +16,11 @@ namespace Job_Satisfaction
                 workAmounts[pawn] = 0f;
             }
             workAmounts[pawn] += amount;
-            //Log.Message($"JobSatisfaction: Added {amount} work to pawn '{pawn.Name}', total work now {workAmounts[pawn]}.");
+
+            if (GameComponent_WorkTracker.EnableLogging)
+            {
+                Log.Message($"JobSatisfaction: Added {amount} work of type '{pawn.jobs.curJob}' to pawn '{pawn.Name}', total work now {workAmounts[pawn]}.");
+            }
         }
 
         public static float GetWork(Pawn pawn)
@@ -32,14 +37,15 @@ namespace Job_Satisfaction
             if (workAmounts.ContainsKey(pawn))
             {
                 workAmounts[pawn] = 0f;
-                //Log.Message($"JobSatisfaction: Reset work for pawn '{pawn.Name}'.");
+                Log.Message($"JobSatisfaction: Reset work for pawn '{pawn.Name}'.");
             }
         }
 
         public static void ResetAllWork()
         {
             workAmounts.Clear();
-            //Log.Message("JobSatisfaction: Reset all work for all pawns.");
+            Log.Message("JobSatisfaction: Reset all work for all pawns.");
         }
+
     }
 }

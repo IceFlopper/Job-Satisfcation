@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -8,8 +9,8 @@ namespace Job_Satisfaction
     {
         public static JobSatisfactionSettings settings;
 
-        private const float DefaultWorkAmountDividerForBills = 1f;
-        private const float DefaultWorkAmountDividerForFrames = 10f;
+        private const float DefaultWorkAmountDividerForBills = 3f;
+        private const float DefaultWorkAmountDividerForFrames = 12.5f;
         private const float DefaultWorkAmountMultiplierForResearch = 1f;
         private const float DefaultWorkAmountDividerForHarvesting = 100f;
         private const float DefaultWorkAmountDividerForCuttingPlants = 100f;
@@ -21,6 +22,10 @@ namespace Job_Satisfaction
         public JobSatisfactionMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<JobSatisfactionSettings>();
+
+            // Harmony patching
+            var harmony = new Harmony("com.example.rimworldmods.jobsatisfaction");
+            harmony.PatchAll();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -65,30 +70,6 @@ namespace Job_Satisfaction
         public override string SettingsCategory()
         {
             return "Job Satisfaction";
-        }
-    }
-
-    [StaticConstructorOnStartup]
-    public static class JobSatisfactionInitializer
-    {
-        static JobSatisfactionInitializer()
-        {
-            var harmony = new Harmony("com.Lewkah0.JobSatisfaction");
-            harmony.PatchAll();
-            Log.Message("JobSatisfaction: Harmony patches applied.");
-
-            LongEventHandler.QueueLongEvent(InitGameComponent, "Initializing Job Satisfaction Mod", false, null);
-        }
-
-        private static void InitGameComponent()
-        {
-            if (Current.Game != null)
-            {
-                if (Current.Game.GetComponent<JobSatisfactionGameComponent>() == null)
-                {
-                    Current.Game.components.Add(new JobSatisfactionGameComponent(Current.Game));
-                }
-            }
         }
     }
 }

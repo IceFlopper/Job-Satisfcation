@@ -59,7 +59,7 @@ namespace Job_Satisfaction
                     return;
                 }
 
-                loggedIdleJobMessage = false; // Reset the flag for future messages
+                loggedIdleJobMessage = false; 
 
                 //Log.Message($"JobSatisfaction: Processing job '{job.def.defName}' for pawn '{pawn.Name}'.");
 
@@ -98,7 +98,9 @@ namespace Job_Satisfaction
                 ResearchProjectDef currentResearch = Find.ResearchManager.GetProject();
                 if (currentResearch != null)
                 {
-                    workAmount = currentResearch.baseCost * JobSatisfactionMod.settings.workAmountMultiplierForResearch;
+                    float progress = Find.ResearchManager.GetProgress(currentResearch);
+
+                    workAmount = progress * JobSatisfactionMod.settings.workAmountMultiplierForResearch;
                 }
             }
             else if (job.def == JobDefOf.Harvest || job.def == JobDefOf.HarvestDesignated)
@@ -143,6 +145,5 @@ namespace Job_Satisfaction
 
             return workAmount;
         }
-
     }
 }

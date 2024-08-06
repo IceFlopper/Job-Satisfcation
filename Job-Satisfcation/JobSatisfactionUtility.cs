@@ -12,7 +12,16 @@ namespace Job_Satisfaction
             "JobSatisfaction_Medium",
             "JobSatisfaction_Large",
             "JobSatisfaction_Huge",
+            "JobSatisfaction_HardWorker_Small",
+            "JobSatisfaction_HardWorker_Medium",
+            "JobSatisfaction_HardWorker_Large",
+            "JobSatisfaction_HardWorker_Huge",
+            "JobSatisfaction_Lazy_Small",
+            "JobSatisfaction_Lazy_Medium",
+            "JobSatisfaction_Lazy_Large",
+            "JobSatisfaction_Lazy_Huge",
             "JobSatisfaction_Burnout"
+
         };
 
         public static void RemoveExistingJobSatisfactionThoughts(Pawn pawn, string thoughtDefName = null)
@@ -43,6 +52,9 @@ namespace Job_Satisfaction
                 return;
             }
 
+            // Always remove existing job satisfaction thoughts before adding a new one
+            RemoveExistingJobSatisfactionThoughts(pawn);
+
             if (!pawn.needs.mood.thoughts.memories.Memories.Any(m => m.def == thoughtDef))
             {
                 Thought_Memory thought = (Thought_Memory)ThoughtMaker.MakeThought(thoughtDef);
@@ -60,6 +72,7 @@ namespace Job_Satisfaction
                 //Log.Message($"JobSatisfaction: Thought '{thoughtDefName}' already present for pawn '{pawn.Name}', not adding again.");
             }
         }
+
 
         public static (float smallThreshold, float mediumThreshold, float largeThreshold, float hugeThreshold) CalculateThresholds(Pawn pawn)
         {
