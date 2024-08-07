@@ -36,17 +36,36 @@ namespace Job_Satisfaction
 
         private bool CheckForBurnout(Pawn pawn, float totalWork, (float smallThreshold, float mediumThreshold, float largeThreshold, float hugeThreshold) thresholds)
         {
-            float burnoutThreshold = thresholds.hugeThreshold * 1.5f;
 
-            if (totalWork > burnoutThreshold)
+            float smallThresholdChance = 0.01f;
+            float mediumThresholdChance = 0.01f;
+            float largeThresholdChance = 0.03f;
+            float hugeThresholdChance = 0.06f;
+
+            if (totalWork > thresholds.smallThreshold && Rand.Value < smallThresholdChance)
             {
-                JobSatisfactionUtility.RemoveExistingJobSatisfactionThoughts(pawn, "JobSatisfaction_Burnout");
-                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Small");
+                return true;
+            }
+            else if (totalWork > thresholds.mediumThreshold && Rand.Value < mediumThresholdChance)
+            {
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Medium");
+                return true;
+            }
+            else if (totalWork > thresholds.largeThreshold && Rand.Value < largeThresholdChance)
+            {
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Large");
+                return true;
+            }
+            else if (totalWork > thresholds.hugeThreshold && Rand.Value < hugeThresholdChance)
+            {
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Huge");
                 return true;
             }
 
             return false;
         }
+
 
         public void ResetAllWork()
         {
