@@ -44,22 +44,22 @@ namespace Job_Satisfaction
 
             if (totalWork > thresholds.smallThreshold && Rand.Value < smallThresholdChance)
             {
-                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Small");
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
                 return true;
             }
             else if (totalWork > thresholds.mediumThreshold && Rand.Value < mediumThresholdChance)
             {
-                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Medium");
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
                 return true;
             }
             else if (totalWork > thresholds.largeThreshold && Rand.Value < largeThresholdChance)
             {
-                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Large");
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
                 return true;
             }
             else if (totalWork > thresholds.hugeThreshold && Rand.Value < hugeThresholdChance)
             {
-                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout_Huge");
+                JobSatisfactionUtility.AddJobSatisfactionThought(pawn, "JobSatisfaction_Burnout");
                 return true;
             }
 
